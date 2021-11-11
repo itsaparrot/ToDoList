@@ -4,7 +4,7 @@
 <div class="container top-section">
     {{ wtf.quick_form(form, novalidate=True, button_map={"submit": "primary"}) }}
 </div>
-
+<!--save button with flash warning-->
 <div class="container save-box">
     {% with messages = get_flashed_messages() %}
     {% if messages %}
@@ -20,25 +20,23 @@
         <!--listing out todos not saved to a user-->
         {% if temp_todo != '' %}
         {% for todo in temp_todo %}
-        <div class="col-lg-2">
+        <div class="col-lg-2 tasks">
             {{ todo | safe}}
             <!--delete task-->
-            <a href="{{ url_for('delete_task', task_index=temp_todo.index(todo)) }}">❌ </a>
+            <a href="{{ url_for('delete_task', task_index=temp_todo.index(todo)) }}"❌</a>
         </div>
         {% endfor %}
         {% endif %}
         <!--todos saved by user-->
         {% if todos %}
         {% for todo in todos %}
-        <div class="col-lg-2">
+        <div class="col-lg-2 tasks">
             {{ todo.text | safe}}
             <a href="{{ url_for('delete_saved_task', task_id=todo.id) }}">❌ </a>
         </div>
         {% endfor %}
         {% endif %}
     </div>
-
 </div>
-
 </body>
 </html>

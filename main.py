@@ -5,7 +5,7 @@ from flask_bootstrap import Bootstrap
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy.orm import relationship
-from flask_login import UserMixin, login_user, LoginManager, current_user, logout_user, login_manager
+from flask_login import UserMixin, login_user, LoginManager, current_user, logout_user
 
 import os
 
@@ -122,9 +122,11 @@ def logout():
 
 @app.route('/save-list', methods=['GET', 'POST'])
 def save_list():
+    # checks if user is logged in, warning message if not
     if not current_user.is_authenticated:
         flask.flash('You must be logged in to save lists')
         return redirect(url_for('home'))
+    # checks list if empty before trying to save
     elif temp_todo_list != '':
         tasks_to_add = []
         for text in temp_todo_list:
@@ -144,6 +146,7 @@ def save_list():
 @app.route('/new-list')
 def clear_list():
     temp_todo_list.clear()
+    # if user is logged in clears saved tasks
     if current_user.is_authenticated:
         all_saved_todo = ToDo.query.filter_by(author_id=current_user.id).all()
         for todo in all_saved_todo:
@@ -162,9 +165,8 @@ def delete_task():
 
 @app.route('/delete-saved-task')
 def delete_saved_task():
-    print('delet saved task in')
+    # gets task id, uses it to find and delete task in database
     task_id = request.args.get('task_id')
-    print(task_id)
     task_to_delete = ToDo.query.get(task_id)
     db.session.delete(task_to_delete)
     db.session.commit()
