@@ -4,3 +4,19 @@ background-color: #B7C3B0
 a{
 text-decoration:none;
 }
+
+.top-section{
+padding-top: 40px;
+}
+
+.bottom-section{
+padding-top: 40px;
+}
+
+.save-box{
+margin-top: 40px;
+}
+
+.save-button{
+color: #1f2021;
+}
