@@ -1,7 +1,6 @@
 import flask
-from flask import Flask, render_template, redirect, url_for, flash, request
+from flask import Flask, render_template, redirect, url_for, request
 from flask_bootstrap import Bootstrap
-from flask_ckeditor import CKEditor
 
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_sqlalchemy import SQLAlchemy
@@ -14,7 +13,6 @@ from forms import ToDoForm, RegisterForm, LoginForm
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = os.environ['SQL_ALCHEMY_KEY']
-ckeditor = CKEditor(app)
 Bootstrap(app)
 
 # connect to database, use postgresQL when available
