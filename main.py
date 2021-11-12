@@ -12,7 +12,7 @@ import os
 from forms import ToDoForm, RegisterForm, LoginForm
 
 app = Flask(__name__)
-app.config['SECRET_KEY'] = os.environ.get['SQL_ALCHEMY_KEY']
+app.config['SECRET_KEY'] = os.environ['SQL_ALCHEMY_KEY']
 Bootstrap(app)
 
 # connect to database, use postgresQL when available
