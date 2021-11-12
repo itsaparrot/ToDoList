@@ -174,4 +174,4 @@ def delete_saved_task():
 
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run()
