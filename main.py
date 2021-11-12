@@ -15,8 +15,12 @@ app = Flask(__name__)
 app.config['SECRET_KEY'] = os.environ['SQL_ALCHEMY_KEY']
 Bootstrap(app)
 
+# fix for hiroku, change postgres to postgresql
+uri = os.getenv("DATABASE_URL")
+if uri and uri.startswith("postgres://"):
+    uri = uri.replace("postgres://", "postgresql://", 1)
 # connect to database, use postgresQL when available
-app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('DATABASE_URL', 'sqlite:///todo.db')
+app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get(uri, 'sqlite:///todo.db')
 db = SQLAlchemy(app)
 
 # manages keeping user signed in
