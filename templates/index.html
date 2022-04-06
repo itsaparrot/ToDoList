@@ -16,11 +16,11 @@
     <a href="{{ url_for('save_list') }}" class="save-button">Save List</a>
 </div>
 <div class="container bottom-section">
-    <div class="row bottom-buffer">
+    <div class="row bottom-buffer text-break">
         <!--listing out todos not saved to a user-->
         {% if temp_todo != '' %}
         {% for todo in temp_todo %}
-        <div class="col-lg-2 task-container">
+        <div class="col-lg-2 task-container ">
             <div class="task">
                 {{ todo | safe}}
                 <!--delete task-->
